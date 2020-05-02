@@ -10,6 +10,7 @@ node{
             name: 'REQUESTED_ACTION')
     }
     stage("clone"){
+        REQUESTED_ACTION = env.BRANCH_NAME;
         when {
                 // Only say hello if a "greeting" is requested
                 expression { params.REQUESTED_ACTION == 'develop' }
