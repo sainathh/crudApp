@@ -1,9 +1,11 @@
+def r;
 node{
     sh '''
         pwd
         r=`pwd`
         echo "branch: $r"
     '''
+    echo "branch: ${r}"
     stage("clone"){
         sh '''
             if [ $r -eq "/var/lib/jenkins/workspace/multi_develop" ]
