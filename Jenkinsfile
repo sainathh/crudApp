@@ -6,7 +6,7 @@ node{
     '''
     stage("clone"){
         sh '''
-            if [ $r -eq /var/lib/jenkins/workspace/multi_develop ]
+            if [ $r -eq "/var/lib/jenkins/workspace/multi_develop" ]
             then
                 git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
             fi
