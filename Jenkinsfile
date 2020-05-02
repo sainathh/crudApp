@@ -9,7 +9,6 @@ pipeline {
 
     stages {
         stage ('clone') {
-	    echo "${env.BRANCH_NAME}"
  	    REQUESTED_ACTION = env.BRANCH_NAME;
             when {
                 // Only say hello if a "greeting" is requested
@@ -19,14 +18,14 @@ pipeline {
                 echo "Hello, Develop"
 		
             }
-	    when {
+	    /**when {
                 // Only say hello if a "greeting" is requested
                 expression { params.REQUESTED_ACTION == 'release' }
             }
             steps {
                 echo "Hello, release"
 		
-            }
+            }**/
         }
     }
 }
