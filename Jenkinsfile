@@ -12,7 +12,7 @@ node{
 	else
 	    //git branch: env.TAG_NAME, url: '$github_url'
 	    git 'https://github.com/sainathh/crudApp.git'
-	    sh "git checkout tags/${env.TAG_NAME}"
+	    sh "git checkout tags/${tag}"
 		
     }
      stage("build"){
