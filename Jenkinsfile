@@ -1,10 +1,10 @@
-def branch = env.BRANCH_NAME
+def branch = env.BRANCH_NAME;
 node{
     echo "${workspace}"
     echo "${env.BRANCH_NAME}"
     //GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
     stage("clone"){
-            def branch = env.BRANCH_NAME
+            def branch = env.BRANCH_NAME;
                 git branch: '$branch', url: 'https://github.com/sainathh/crudApp.git'
        /** sh '''
             if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
