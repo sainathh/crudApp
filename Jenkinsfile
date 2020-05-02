@@ -11,6 +11,12 @@ node{
                 git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
             fi
         '''
+        sh '''
+            if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
+            then
+                git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
+            fi
+        '''
     }
      stage("build"){
         def mavenHome = tool name: "Maven363", type: "maven"
