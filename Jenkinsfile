@@ -4,17 +4,9 @@ node{
         r=`pwd`
         echo "branch: $r"
     '''
+    echo ${workspace}
     stage("clone"){
-        sh '''
-            pwd
-            r=`pwd`
-            echo "branch: $r"
-            echo "branch: ${r}"
-            if [ $r -eq "/var/lib/jenkins/workspace/multi_develop" ]
-            then
                 git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
-            fi
-        '''
        /** sh '''
             if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
             then
