@@ -1,4 +1,3 @@
-def branch = env.BRANCH_NAME;
 node{
     echo "${workspace}"
     echo "${env.BRANCH_NAME}"
@@ -7,14 +6,10 @@ node{
     stage("clone"){
         if (env.BRANCH_NAME == "develop")
             git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
-        else 
+        else if (env.BRANCH_NAME == "release")
             git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
-       /** sh '''
-            if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
-            then
-                git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
-            fi
-        '''**/
+        else
+            git branch: 'master', url: 'https://github.com/sainathh/crudApp.git'
     }
      stage("build"){
         def mavenHome = tool name: "Maven363", type: "maven"
@@ -24,7 +19,9 @@ node{
     stage("deploy"){
         if (env.BRANCH_NAME == "develop")
             nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'dev', version: '0.0.1-SNAPSHOT'
-        else 
+        else if (env.BRANCH_NAME == "release")
             nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'qa', version: '0.0.1-SNAPSHOT'
+        else
+            nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'stage', version: '0.0.1-SNAPSHOT'
     }
 }
