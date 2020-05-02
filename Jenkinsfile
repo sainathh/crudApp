@@ -5,8 +5,8 @@ node{
     //GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
     
     stage("clone"){
-        
-        git branch: 'env.BRANCH_NAME', url: 'https://github.com/sainathh/crudApp.git'       
+        if (env.BRANCH_NAME == "develop)
+        git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'       
        /** sh '''
             if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
             then
