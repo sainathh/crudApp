@@ -1,5 +1,6 @@
 node{
     echo "${workspace}"
+    echo ${env.BRANCH_NAME}
     stage("clone"){
                 git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
        /** sh '''
