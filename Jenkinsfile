@@ -4,7 +4,10 @@ node{
     echo "${env.TAG_NAME}"
     
     stage("clone"){
+	if (env.TAG_NAME == "null")
             git branch: env.BRANCH_NAME, url: '$github_url'
+	else
+	    git branch: env.TAG_NAME, url: '$github_url'
     }
      stage("build"){
         def mavenHome = tool name: "Maven363", type: "maven"
