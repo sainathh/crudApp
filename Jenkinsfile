@@ -6,7 +6,9 @@ node{
     
     stage("clone"){
         if (env.BRANCH_NAME == "develop")
-        git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'       
+            git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
+        else
+            git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
        /** sh '''
             if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
             then
