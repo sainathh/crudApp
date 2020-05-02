@@ -10,7 +10,10 @@ node{
 	if (tag == null)
             git branch: env.BRANCH_NAME, url: '$github_url'
 	else
-	    git branch: env.TAG_NAME, url: '$github_url'
+	    //git branch: env.TAG_NAME, url: '$github_url'
+	    git 'https://github.com/sainathh/crudApp.git'
+	    sh "git checkout tags/${env.TAG_NAME}"
+		
     }
      stage("build"){
         def mavenHome = tool name: "Maven363", type: "maven"
