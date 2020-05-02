@@ -3,9 +3,23 @@ node{
     echo "${workspace}"
     echo "${env.BRANCH_NAME}"
     //GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+    parameters {
+        choice(
+            choices: ['develop' , 'release'],
+            description: '',
+            name: 'REQUESTED_ACTION')
+    }
     stage("clone"){
+        when {
+                // Only say hello if a "greeting" is requested
+                expression { params.REQUESTED_ACTION == 'develop' }
+            }
+            steps {
+                echo "Hello, Develop"
+                git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
+            }
           
-                git branch: '$branch', url: 'https://github.com/sainathh/crudApp.git'
+                
        /** sh '''
             if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
             then
