@@ -1,7 +1,9 @@
-def r;
 node{
-    r = "sh "pwd""
-    echo "branch: ${r}"
+    sh '''
+        pwd
+        r=`pwd`
+        echo "branch: $r"
+    '''
     stage("clone"){
         git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
     }
