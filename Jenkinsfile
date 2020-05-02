@@ -1,8 +1,9 @@
+def branch = ${env.BRANCH_NAME}
 node{
     echo "${workspace}"
     echo "${env.BRANCH_NAME}"
     stage("clone"){
-                git branch: '${env.BRANCH_NAME}', url: 'https://github.com/sainathh/crudApp.git'
+                git branch: '${branch}', url: 'https://github.com/sainathh/crudApp.git'
        /** sh '''
             if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
             then
