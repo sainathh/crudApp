@@ -7,7 +7,7 @@ node{
     stage("clone"){
         if (env.BRANCH_NAME == "develop")
             git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
-        else
+        else 
             git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
        /** sh '''
             if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
@@ -24,5 +24,7 @@ node{
     stage("deploy"){
         if (env.BRANCH_NAME == "develop")
             nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'dev', version: '0.0.1-SNAPSHOT'
+        else 
+            nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'qa', version: '0.0.1-SNAPSHOT'
     }
 }
