@@ -6,7 +6,7 @@ node{
     
     stage("clone"){
         if (env.BRANCH_NAME == "develop")
-            git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
+            git branch: env.BRANCH_NAME, url: 'https://github.com/sainathh/crudApp.git'
         else if (env.BRANCH_NAME == "release")
             git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
         else if (env.BRANCH_NAME == "master")
