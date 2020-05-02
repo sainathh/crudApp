@@ -14,7 +14,8 @@ node{
     }
 
     stage("deploy"){
-	switch (env.BRANCH_NAME) {
+	def branch = env.BRANCH_NAME;
+	switch (branch) {
 		case develop:
 		    println("Develop branch Build is completed\n Deploy to dev environment");
 		    nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'dev', version: '0.0.1-SNAPSHOT';
