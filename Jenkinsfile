@@ -1,4 +1,5 @@
 node{
+    sh "pwd"
     stage("clone"){
         git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
     }
@@ -8,6 +9,6 @@ node{
         sh "${mavenCMD} clean package"
     }
     stage("deploy"){
-        nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: '**/*war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'test-1', version: '0.0.1-SNAPSHOT'
+        nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'test-1', version: '0.0.1-SNAPSHOT'
     }
 }
