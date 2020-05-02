@@ -1,13 +1,12 @@
-def r;
 node{
     sh '''
         pwd
         r=`pwd`
         echo "branch: $r"
     '''
-    echo "branch: ${r}"
     stage("clone"){
         sh '''
+            echo "branch: $r"
             if [ $r -eq "/var/lib/jenkins/workspace/multi_develop" ]
             then
                 git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
