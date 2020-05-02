@@ -14,7 +14,7 @@ pipeline {
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running. 'nexus-3' is defined in the docker-compose file
-        NEXUS_URL = $nexus_url
+        NEXUS_URL = "18.207.203.164:8081"
         // Repository where we will upload the artifact
         NEXUS_REPOSITORY = "dev"
         // Jenkins credential id to authenticate to Nexus OSS
