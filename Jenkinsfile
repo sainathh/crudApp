@@ -1,6 +1,7 @@
 node{
     echo "${workspace}"
     echo "${env.BRANCH_NAME}"
+    echo "${env.TAG_NAME}"
     //GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
     
     stage("clone"){
@@ -8,7 +9,9 @@ node{
             git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
         else if (env.BRANCH_NAME == "release")
             git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
-        else
+        else if (env.BRANCH_NAME == "master")
+            git branch: 'master', url: 'https://github.com/sainathh/crudApp.git'
+        else 
             git branch: 'master', url: 'https://github.com/sainathh/crudApp.git'
     }
      stage("build"){
@@ -21,7 +24,9 @@ node{
             nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'dev', version: '0.0.1-SNAPSHOT'
         else if (env.BRANCH_NAME == "release")
             nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'qa', version: '0.0.1-SNAPSHOT'
-        else
+        else if (env.BRANCH_NAME == "master")
             nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'stage', version: '0.0.1-SNAPSHOT'
+        else
+            nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'NEXUS_CREDENTIALS', groupId: 'com.app', nexusUrl: '18.207.203.164:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'prod', version: '0.0.1-SNAPSHOT'
     }
 }
