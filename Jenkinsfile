@@ -49,7 +49,7 @@ pipeline {
                     
                     pomversion = sh(returnStdout: true,script:"sed -n '/<parent>/,/<\\/parent>/p' pom.xml| sed -ne '/<version>/p'|sed -e 's/<version>//' -e 's/<\\/version>//'").toString().trim()
                     
-                    pom = readMavenPom file: "pom.xml";
+                    pom = readMavenPom file: pom.xml;
                     // Find built artifact under target folder
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     // Print some info from the artifact found
