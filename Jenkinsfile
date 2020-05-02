@@ -7,12 +7,14 @@ node{
     stage("clone"){
 	tag = env.TAG_NAME
 	    echo "${tag}"
-	if (tag == null)
-            git branch: env.BRANCH_NAME, url: '$github_url'
-	else
-	    //git branch: env.TAG_NAME, url: '$github_url'
-	    git 'https://github.com/sainathh/crudApp.git'
-	    sh "git checkout tags/${tag}"
+	    if (tag == null){
+            	git branch: env.BRANCH_NAME, url: '$github_url'
+	    }
+	    else{
+		    //git branch: env.TAG_NAME, url: '$github_url'
+	    	git 'https://github.com/sainathh/crudApp.git'
+	    	sh "git checkout tags/${tag}"
+	    }
 		
     }
      stage("build"){
