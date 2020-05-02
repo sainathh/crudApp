@@ -5,14 +5,7 @@ node{
     //GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
     
     stage("clone"){
-        if (env.BRANCH_NAME == "develop")
-            git branch: env.BRANCH_NAME, url: 'https://github.com/sainathh/crudApp.git'
-        else if (env.BRANCH_NAME == "release")
-            git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
-        else if (env.BRANCH_NAME == "master")
-            git branch: 'master', url: 'https://github.com/sainathh/crudApp.git'
-        else 
-            git branch: 'master', url: 'https://github.com/sainathh/crudApp.git'
+            git branch: env.BRANCH_NAME, url: '$github_url'
     }
      stage("build"){
         def mavenHome = tool name: "Maven363", type: "maven"
