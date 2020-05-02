@@ -1,9 +1,4 @@
 node{
-    sh '''
-        pwd
-        r=`pwd`
-        echo "branch: $r"
-    '''
     echo "${workspace}"
     stage("clone"){
                 git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
