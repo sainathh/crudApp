@@ -1,4 +1,7 @@
 node{
+    echo "${workspace}"
+    echo "${env.BRANCH_NAME}"
+    echo "${env.TAG_NAME}"
     
     stage("clone"){
             git branch: env.BRANCH_NAME, url: '$github_url'
