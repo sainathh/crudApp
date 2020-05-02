@@ -1,10 +1,19 @@
 node{
     sh "pwd"
     sh "r=`pwd`"
-    println(r);
+    
     stage("clone"){
-        
-        git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
+        sh "if [ $r -eq /var/lib/jenkins/workspace/multi_develop ]
+        then
+            git branch: 'develop', url: 'https://github.com/sainathh/crudApp.git'
+        else
+        if [ $r -eq /var/lib/jenkins/workspace/multi_release ]
+        then 
+             git branch: 'release', url: 'https://github.com/sainathh/crudApp.git'
+        else
+             git branch: 'master', url: 'https://github.com/sainathh/crudApp.git'
+        fi
+        fi"
     }
      stage("build"){
         def mavenHome = tool name: "Maven363", type: "maven"
