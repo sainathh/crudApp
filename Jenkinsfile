@@ -5,7 +5,8 @@ node{
     
     
     stage("clone"){
-	tag = env.TAG_NAME	    
+	tag = env.TAG_NAME
+	    echo "${tag}"
 	if (tag == "null")
             git branch: env.BRANCH_NAME, url: '$github_url'
 	else
