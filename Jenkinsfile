@@ -2,9 +2,10 @@ node{
     echo "${workspace}"
     echo "${env.BRANCH_NAME}"
     echo "${env.TAG_NAME}"
+    tag = env.TAG_NAME
     
     stage("clone"){
-	if (env.TAG_NAME == "null")
+	if ($tag == "null")
             git branch: env.BRANCH_NAME, url: '$github_url'
 	else
 	    git branch: env.TAG_NAME, url: '$github_url'
