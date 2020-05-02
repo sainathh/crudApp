@@ -1,4 +1,4 @@
-def branch = ${env.BRANCH_NAME}
+def branch = env.BRANCH_NAME
 node{
     echo "${workspace}"
     echo "${env.BRANCH_NAME}"
