@@ -2,6 +2,7 @@ node{
     echo "${workspace}"
     echo "${env.BRANCH_NAME}"
     echo "${env.TAG_NAME}"
+    echo "${env.JOB_NAME}"
     
     
     stage("clone"){
