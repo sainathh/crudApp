@@ -23,7 +23,7 @@ node{
         def mavenCMD = "${mavenHome}/bin/mvn "
         sh "${mavenCMD} clean package"
     }
-    /**stage("deploy"){
+    stage("deploy"){
         def pom = readMavenPom file: 'pom.xml'
         filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
 	artifactPath = filesByGlob[0].path;
@@ -42,5 +42,5 @@ node{
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'prod', version: pom.version
 			break
 	}
-    }**/
+    }
 }
