@@ -5,5 +5,5 @@
   tasks:
   - name: copy file
     copy: 
-      src: target/{{artifact}}.war
+      src: target/{{artifact}}.{{packaging}}
       dest: /opt/{{env}}/webapps/
