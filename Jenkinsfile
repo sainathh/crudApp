@@ -31,7 +31,7 @@ node{
 	switch(env.BRANCH_NAME){
 		case "develop":
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'dev', version: pom.version
-		sh "ansible-playbook -e env=dev artifact=${pom.artifactId} deploy.yaml"
+		sh "ansible-playbook -e env=dev artifact=${pom.artifactId} packaging=${pom.packaging} deploy.yaml"
 			break
 		case "release":
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'qa', version: pom.version
