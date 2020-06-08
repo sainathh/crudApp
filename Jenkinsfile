@@ -3,7 +3,7 @@ node{
     echo "${env.BRANCH_NAME}"
     echo "${env.TAG_NAME}"
     echo "${env.JOB_NAME}"
-    
+
     
     stage("clone"){
 	tag = env.TAG_NAME
@@ -32,7 +32,8 @@ node{
 		case "develop":
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'dev', version: pom.version
 		        sh "ansible-playbook -e env=dev deploy.yaml"
-		    	break
+		echo ${repository}
+			break
 		case "release":
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'qa', version: pom.version
 			sh "ansible-playbook -e env=qa deploy.yaml"
