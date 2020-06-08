@@ -31,19 +31,19 @@ node{
 	switch(env.BRANCH_NAME){
 		case "develop":
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'dev', version: pom.version
-		sh "ansible-playbook -e env=dev -e artifact=${pom.artifactId} -e packaging=${pom.packaging} deploy.yaml"
+		        sh "ansible-playbook -e env=dev -e artifact=${pom.artifactId} -e packaging=${pom.packaging} deploy.yaml"
 			break
 		case "release":
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'qa', version: pom.version
-			sh "ansible-playbook -e env=qa deploy.yaml"
+			sh "ansible-playbook -e env=qa -e artifact=${pom.artifactId} -e packaging=${pom.packaging} deploy.yaml"
 			break
 		case "master":
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'stage', version: pom.version
-		        sh "ansible-playbook -e env=stage deploy.yaml"
+		        sh "ansible-playbook -e env=stage -e artifact=${pom.artifactId} -e packaging=${pom.packaging} deploy.yaml"
 			break
 		default:
 			nexusArtifactUploader artifacts: [[artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging]], credentialsId: 'nexus', groupId: pom.groupId, nexusUrl: '$nexus_url', nexusVersion: 'nexus3', protocol: 'http', repository: 'prod', version: pom.version
-		        sh "ansible-playbook -e env=prod deploy.yaml"
+		        sh "ansible-playbook -e env=prod -e artifact=${pom.artifactId} -e packaging=${pom.packaging} deploy.yaml"
 			break
 	}
     }
