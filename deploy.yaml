@@ -4,6 +4,6 @@
   become_method:  sudo
   tasks:
   - name: copy file
-      copy: 
-        src: target/*.war
-        dest: /opt/{{env}}/webapps/
+    copy: 
+      src: target/*.war
+      dest: /opt/{{env}}/webapps/
