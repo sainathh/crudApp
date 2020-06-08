@@ -5,5 +5,5 @@
   tasks:
   - name: copy file
     copy: 
-      src: target/*.war
+      src: target/crudapp.war
       dest: /opt/{{env}}/webapps/
