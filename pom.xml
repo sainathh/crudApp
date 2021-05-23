@@ -54,5 +54,29 @@
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+		<repository>
+  			<id>crudApp</id>
+  			<url>https://pkgs.dev.azure.com/sainadhpotta/Venkataramana/_packaging/crudApp/maven/v1</url>
+  			<releases>
+    				<enabled>true</enabled>
+  			</releases>
+  			<snapshots>
+    				<enabled>true</enabled>
+  			</snapshots>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+  			<id>crudApp</id>
+  			<url>https://pkgs.dev.azure.com/sainadhpotta/Venkataramana/_packaging/crudApp/maven/v1</url>
+  			<releases>
+    				<enabled>true</enabled>
+  			</releases>
+  			<snapshots>
+    				<enabled>true</enabled>
+  			</snapshots>
+		</repository>
+	</distributionManagement>
 
 </project>
